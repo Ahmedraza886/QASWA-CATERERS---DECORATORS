@@ -25,10 +25,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const navLinks = document.getElementById('navLinks');
 
     if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', function () {
+        function toggleMenu(e) {
+            e.stopPropagation();
             navLinks.classList.toggle('active');
             menuToggle.classList.toggle('active');
-        });
+        }
+        menuToggle.addEventListener('click', toggleMenu);
+        menuToggle.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            toggleMenu(e);
+        }, { passive: false });
     }
 
     // Close mobile menu when a link is clicked
@@ -68,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Close menu when clicking outside
     document.addEventListener('click', function (e) {
-        if (!e.target.closest('nav')) {
+        if (!e.target.closest('nav') && !e.target.closest('#menuToggle')) {
             closeAllMenus();
         }
     });
