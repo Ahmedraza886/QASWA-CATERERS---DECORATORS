@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
             menuToggle.classList.toggle('active');
         }
         menuToggle.addEventListener('click', toggleMenu);
-        menuToggle.addEventListener('touchstart', function(e) {
+        menuToggle.addEventListener('touchstart', function (e) {
             e.preventDefault();
             toggleMenu(e);
         }, { passive: false });
@@ -72,12 +72,29 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Close menu when clicking outside
+    // Close menu when clicking outside (not on the toggle itself)
     document.addEventListener('click', function (e) {
         if (!e.target.closest('nav') && !e.target.closest('#menuToggle')) {
             closeAllMenus();
         }
     });
+
+    // ===== NAVBAR SCROLL TRANSPARENCY =====
+    const header = document.querySelector('header');
+
+    function updateNavbar() {
+        if (!header) return;
+        if (window.scrollY > 80) {
+            header.style.background = 'transparent';
+            header.style.boxShadow = 'none';
+        } else {
+            header.style.background = 'rgba(0, 0, 0, 0.98)';
+            header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+        }
+    }
+
+    window.addEventListener('scroll', updateNavbar);
+    updateNavbar(); // run on load
 
     // ===== HERO SLIDER =====
     let currentSlide = 0;
@@ -113,17 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
-
-    // ===== HEADER SCROLL EFFECT =====
-    const header = document.querySelector('header');
-
-    window.addEventListener('scroll', function () {
-        if (header) {
-            header.style.boxShadow = window.scrollY > 100
-                ? '0 2px 20px rgba(0,0,0,0.15)'
-                : '0 2px 10px rgba(0,0,0,0.1)';
-        }
-    });
 
     // ===== CONTACT FORM HANDLING =====
     const contactForm = document.querySelector('.contact-form');
@@ -260,5 +266,4 @@ window.addEventListener('beforeunload', function () {
 window.addEventListener('load', function () {
     document.body.style.opacity = '1';
 });
-
 
