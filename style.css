@@ -127,11 +127,13 @@ nav .logo::before {
 }
 
 .menu-toggle span {
-    width: 25px;
+    width: 28px;
     height: 3px;
-    background: #333;
-    margin: 3px 0;
+    background: #d4af37;
+    margin: 5px 0;
     transition: 0.3s;
+    display: block;
+    border-radius: 2px;
 }
 
 /* ===== PAGE SECTIONS ===== */
@@ -1307,38 +1309,52 @@ footer .footer-content .logo {
     }
 
     .logo-img {
-        height: 35px;   /* Mobile logo — smaller than desktop (60px) */
+        height: 25px;   /* Mobile logo — smaller than desktop (60px) */
         width: auto;
     }
 
     .menu-toggle {
         display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         order: 1;
         position: absolute;
-        left: 1.5rem;
+        left: 1rem;
+        z-index: 1100;
+        cursor: pointer;
+        padding: 10px;
+        min-width: 48px;
+        min-height: 48px;
+        background: rgba(0,0,0,0.3);
+        border-radius: 6px;
     }
 
-    /* Mobile toggle menu — reduced to slide-in panel */
+    /* Mobile nav — transform avoids overflow-x:hidden clipping on body */
     .nav-links {
         position: fixed;
-        left: -100%;
-        top: 80px;
+        left: 0;
+        top: 0;
+        padding-top: 90px;
         flex-direction: column;
-        background: white;
-        width: 70%;             /* Reduced from 100% */
-        max-width: 280px;       /* Cap on larger phones */
-        text-align: center;
-        transition: left 0.3s;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-        padding: 2rem 0;
+        background: rgba(15, 15, 15, 0.98);
+        width: 75%;
+        max-width: 300px;
+        text-align: left;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        box-shadow: 4px 0 25px rgba(0, 0, 0, 0.6);
         gap: 0;
         order: 3;
         justify-content: flex-start;
         border-right: 2px solid #d4af37;
+        z-index: 1050;
+        height: 100vh;
+        overflow-y: auto;
     }
 
     .nav-links.active {
-        left: 0;
+        transform: translateX(0);
     }
 
     .nav-item {
@@ -1347,8 +1363,11 @@ footer .footer-content .logo {
 
     .nav-item > a {
         display: block;
-        padding: 1rem;
+        padding: 1rem 1.5rem;
         width: 100%;
+        color: #ffffff;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.15);
     }
 
     .dropdown-menu {
@@ -1491,11 +1510,3 @@ footer .footer-content .logo {
         font-size: 3.5rem;
     }
 }
-
-
-
-
-
-
-
-
